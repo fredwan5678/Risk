@@ -1,0 +1,117 @@
+Names:  Michael Elgie (1256027) 
+        Faisal Redwan (1545505)
+CMPUT 275, WI 18 
+Final Project
+Risk in Space
+
+Included files:
+    /riskGameP1
+        * comm.h
+        * draw.h
+        * dynarray.h
+        * globalData.h
+        * hashtable.h
+        * linkedlist.h
+        * Makefile
+        * mapGraph.h
+        * map.txt
+        * readFile.h
+        * risk.cpp
+
+    /riskGameP2
+        * comm.h
+        * draw.h
+        * dynarray.h
+        * globalData.h
+        * hashtable.h
+        * linkedlist.h
+        * Makefile
+        * mapGraph.h
+        * map.txt
+        * readFile.h
+        * risk.cpp
+
+    /OnePlayerRisk
+        * comm.h
+        * draw.h
+        * dynarray.h
+        * globalData.h
+        * hashtable.h
+        * linkedlist.h
+        * Makefile
+        * mapGraph.h
+        * map.txt
+        * readFile.h
+        * risk.cpp
+
+Wire Setup:
+
+    On each arduino, make the following connections:
+
+        BRD PIN  --  ARDUINO PIN
+            GND  --  GND
+            Vin  --  5V
+            CLK  --  52
+            MISO --  50
+            MOSI --  51
+            CS   --  10
+            D/C  --  9
+            Y+   --  A2
+            X+   --  4
+            Y-   --  5
+            X-   --  A3
+            CCS  --  6
+
+    Now connect the 2 arduinos together:
+
+        Arduino 1 -- Arduino 2
+              TX3 -- RX3
+              RX3 -- TX3
+              GND -- GND
+
+Running the code:
+    First one must make sure that the arduinos are properly wired to displays, and that they are properly connected together for communications
+
+    2 arduino option: 
+        The code runs in 2 different directories, so you will need to upload a different program to each arduino
+
+        1.
+            * cd into the riskGameP1 directory using the terminal, this arduino will be player 1 (blue team)
+            * in the command line, type 'make upload' to compile and upload the player 1 code to the arduino
+            * since the arduino just needs the computer for power, this terminal isn't used anymore
+
+        2. 
+            * cd into the riskGameP1 directory using the terminal, this arduino will be player 2 (red team)
+            * in the command line, type 'make upload' to compile and upload the player 2 code to the arduino
+            * since the arduino just needs the computer for power, this terminal isn't used anymore
+
+        Now the code is uploaded to both of the arduinos, and the game is ready to begin. Player 1 will go first, and the game will continue until one of the players has no armies remaining.
+
+    1 arduino option:
+        This game can also be played on only 1 arduino, where both players will take their turn one after the other on the same device
+        1.
+            * cd into the OnePlayerRisk directory using the terminal, this arduino will be for both player 1 (blue team) and player 2 (red team)
+            * in the command line, type 'make upload' to compile and upload the code to the arduino
+            * since the arduino just needs the computer for power, this terminal isn't used anymore        
+
+    Game turn:
+        1. player will get armies based on how many continents they own, as well as any special territories
+        2. they can distribute these extra armies among their owned territories 
+        3. attacking/ redistributing phase: 
+            player will select one of their territories
+            a. attacking: if the player selects an enemy territory, an attack will be carried out until a winner is determined
+            b. redistributing: if the player selects their own territory, one army will be transferred from the first territory to the second
+        4. after the player finishes all attacks and distributions, they end their turn, and play shifts to the next player, repeating the first 3 steps until a winner is determined
+Basics:
+    * the inside color of the territory is the team it belongs to (blue or red)
+    * each continent will have a different border color, where all territories with the same color are part of the same continent
+    * the number represented inside the territory is how many armies are based there
+
+Features:
+    * (optional) communications between 2 arduinos: each player gets an arduino, and play will pass between arduinos. When one player is playing out their turn, the other arduino is idle, not allowing the idle player to do anything until the other player is done. When that player finishes their turn, the arduinos will send the changes to the other one, and will show up on the other players screen. Play will continue like this until one wins
+    * a map is loaded in from the SD card, and read onto the arduino (one can also create a map of their own if they have the desire to)
+    * special tiles: some special tiles on the board (with colored numbers) have special functionality such as getting extra armies each turn, or defensive bonuses
+    * using insertion sort, and a binary searching algorithm, we are able to see if a territory is touched
+    * using hashing, we are able to find neighbours of territories in constant time, allowing for quick verification on whether or not a valid territory was touched 
+    * error handling to make sure legal moves are made, so players cant attack with an opposing teams territory, nor can they attack their own territory, etc.
+    * many asthetic and functional features (including highlighting, redrawing changed territories etc.)
