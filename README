@@ -31,19 +31,6 @@ Included files:
         * readFile.h
         * risk.cpp
 
-    /OnePlayerRisk
-        * comm.h
-        * draw.h
-        * dynarray.h
-        * globalData.h
-        * hashtable.h
-        * linkedlist.h
-        * Makefile
-        * mapGraph.h
-        * map.txt
-        * readFile.h
-        * risk.cpp
-
 Wire Setup:
 
     On each arduino, make the following connections:
@@ -108,7 +95,7 @@ Basics:
     * the number represented inside the territory is how many armies are based there
 
 Features:
-    * (optional) communications between 2 arduinos: each player gets an arduino, and play will pass between arduinos. When one player is playing out their turn, the other arduino is idle, not allowing the idle player to do anything until the other player is done. When that player finishes their turn, the arduinos will send the changes to the other one, and will show up on the other players screen. Play will continue like this until one wins
+    * communications between 2 arduinos: each player gets an arduino, and play will pass between arduinos. When one player is playing out their turn, the other arduino is idle, not allowing the idle player to do anything until the other player is done. When that player finishes their turn, the arduinos will send the changes to the other one, and will show up on the other players screen. Play will continue like this until one wins
     * a map is loaded in from the SD card, and read onto the arduino (one can also create a map of their own if they have the desire to)
     * special tiles: some special tiles on the board (with colored numbers) have special functionality such as getting extra armies each turn, or defensive bonuses
     * using insertion sort, and a binary searching algorithm, we are able to see if a territory is touched
